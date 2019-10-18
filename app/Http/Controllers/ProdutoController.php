@@ -15,7 +15,7 @@ class produtoController extends Controller
     public function index()
     {
         $produtos = Produto::get();
-        return view('produto.index', compact('produtos'));
+        return view('produto.index', ['produtos' => $produtos]);
     }
 
     /**
@@ -41,7 +41,7 @@ class produtoController extends Controller
         $produto->preco = $request ->preco;
         $produto->categoria = $request ->categoria;
         $produto->save();
-        return redirect()->route('produtos.index') ->with('message', 'Produto cadastrado com sucesso!');
+        return redirect()->route('produtos.index') ->with('message', 'Produto alterado com sucesso!');
 
     }
 
@@ -69,7 +69,7 @@ class produtoController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -79,9 +79,14 @@ class produtoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Produto $produto)
     {
-        //
+        $produto = Produto::findOrFail($produto->id);
+        $produto->nome = $request -> nome;
+        $produto->preco = $request -> preco;
+        $produto->categoria = $request ->categoria;
+        $produto->save();
+        return redirect()->route('produtos.index') ->with('message', 'Produto alterado com sucesso!');
     }
 
     /**
@@ -92,6 +97,9 @@ class produtoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $produto = Produto::findOrFail($id);
+        $produto->delete();
+        return redirect()->route('produtos.index') ->with('message', 'Produto excluido com sucesso!');
+
     }
 }

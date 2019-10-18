@@ -16,4 +16,5 @@ Route::get('/', function () {
 });
 
 Route::resource('produtos','ProdutoController');
-
+Route::patch('/produto/update/{produto}', 'ProdutoController@update');
+Route::get('/produto/{produto}/destroy', 'ProdutoController@destroy');
