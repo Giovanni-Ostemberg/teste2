@@ -19,7 +19,7 @@ class CreateClientesTable extends Migration
             $table->string('cpf');
             $table->string('telefone');
             $table->string('endereco');
-            $table->integer('conta_id');
+            $table->integer('conta_id')->foreign('conta_id')->references('id')->on('conta');
             $table->timestamps();
         });
     }

@@ -14,9 +14,10 @@ class CreateItensTable extends Migration
     public function up()
     {
         Schema::create('itens', function (Blueprint $table) {
-            $table->integer('produto_id');
-            $table->integer('pedido_id');
+            $table->integer('produto_id')->foreign('produto_id')->references('id')->on('produto');
+            $table->integer('pedido_id')->foreign('pedido_id')->references('id')->on('pedido');
             $table->integer('quantidade');
+            $table->primary(['produto_id', 'pedido_id']);
             $table->timestamps();
         });
     }

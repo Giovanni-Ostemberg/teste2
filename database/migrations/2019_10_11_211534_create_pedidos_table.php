@@ -16,9 +16,11 @@ class CreatePedidosTable extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->double('valorTotal');
-            $table->Integer('conta_id');
+            $table->Integer('conta_id')->foreign('conta_id')->references('id')->on('conta');
             $table->integer('pessoa_id');
-            $table->boolean('pg');
+            $table->integer('quantidade');
+            $table->float('pago');
+            $table->float('resta');
             $table->timestamps();
         });
     }

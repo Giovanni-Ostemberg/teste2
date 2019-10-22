@@ -18,3 +18,11 @@ Route::get('/', function () {
 Route::resource('produtos','ProdutoController');
 Route::patch('/produto/update/{produto}', 'ProdutoController@update');
 Route::get('/produto/{produto}/destroy', 'ProdutoController@destroy');
+
+Route::resource('clientes','ClienteController');
+Route::patch('/cliente/update/{cliente}', 'ClienteController@update');
+Route::get('/cliente/{cliente}/destroy', 'ClienteController@destroy');
+
+Route::resource('pedidos','PedidoController');
+Route::patch('/pedido/update/{pedido}', 'PedidoController@update');
+Route::get('/pedido/{pedido}/destroy', 'PedidoController@destroy');

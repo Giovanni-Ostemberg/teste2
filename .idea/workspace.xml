@@ -2,12 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c51792d-feda-4427-9e61-18d520745681" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ClienteController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ContaController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/PagamentoController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/PedidoController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Pagamento.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_231613_create_pagamentos_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/cliente/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/pedido/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProdutoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProdutoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/produto/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/produto/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/produto/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/produto/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_11_211526_create_clientes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_11_211526_create_clientes_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_11_211534_create_pedidos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_11_211534_create_pedidos_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_11_211540_create_contas_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_11_211540_create_contas_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_11_211654_create_itens_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_11_211654_create_itens_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -122,8 +130,11 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1S4YtPgz86TvOXeYslp56aMkI8O" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -168,7 +179,7 @@
       <workItem from="1571199499046" duration="204000" />
       <workItem from="1571199703714" duration="1285000" />
       <workItem from="1571272089820" duration="7476000" />
-      <workItem from="1571353823942" duration="7651000" />
+      <workItem from="1571353823942" duration="24418000" />
     </task>
     <servers />
   </component>
@@ -189,6 +200,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <ignored-roots>
       <path value="$PROJECT_DIR$/public" />
     </ignored-roots>
