@@ -39,7 +39,9 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pedido = $request;
+        dd($pedido);
+        return redirect()->route('pedidos.index') ->with('message', 'ok');
     }
 
     /**
