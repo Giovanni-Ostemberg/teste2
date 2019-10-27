@@ -31,7 +31,7 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="TituloModalCentralizado">Editar Produto</h5>
+                                    <h5 class="modal-title" id="TituloModalCentralizado">Editar Cliente</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -50,25 +50,25 @@
                                             <div class="input-group-prepend" style="width:100%;">
                                                 <span class="input-group-text" id="basic-addon1">Cpf</span>
 
-                                                <input type="text"  class="form-control" name="preco" value="{{$cliente->cpf}}">
+                                                <input type="text"  class="form-control" name="cpf" value="{{$cliente->cpf}}">
                                             </div>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend" style="width:100%;">
                                                 <span class="input-group-text" id="basic-addon1">Endereço</span>
-                                                <input type="text" class="form-control"  name="categoria" value="{{$cliente->endereco}}">
+                                                <input type="text" class="form-control"  name="endereco" value="{{$cliente->endereco}}">
                                             </div>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend" style="width:100%;">
                                                 <span class="input-group-text" id="basic-addon1">Telefone</span>
-                                                <input type="text" class="form-control"  name="categoria" value="{{$cliente->telefone}}">
+                                                <input type="text" class="form-control"  name="telefone" value="{{$cliente->telefone}}">
                                             </div>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend" style="width:100%;">
                                                 <span class="input-group-text" id="basic-addon1">Conta</span>
-                                                <input type="text" class="form-control"  name="categoria" value="{{$cliente->conta}}">
+                                                <input type="text" class="form-control"  name="conta" value="{{$cliente->conta_id}}">
                                             </div>
                                         </div>
                                     </div>

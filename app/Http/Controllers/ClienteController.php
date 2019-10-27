@@ -88,8 +88,10 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::findOrFail($cliente->id);
         $cliente->nome = $request -> nome;
-        $cliente->preco = $request -> preco;
-        $cliente->categoria = $request ->categoria;
+        $cliente->cpf = $request -> cpf;
+        $cliente->endereco = $request ->endereco;
+        $cliente->telefone = $request ->telefone;
+        $cliente->conta_id = $request ->conta;
         $cliente->save();
         return redirect()->route('clientes.index') ->with('message', 'Produto alterado com sucesso!');
     }

@@ -1,9 +1,7 @@
-
-
-
 @extends('layout')
 
 @section('content')
+
     <div>
         <h1 text-align="center">Clientes</h1>
     </div>
@@ -71,69 +69,5 @@
         </div>
 
     @endforeach
-
-    <script language="JavaScript">
-        function inserirNovo(idTabela, id){
-            var table = document.getElementById(idTabela);
-            var numOfRows = table.rows.length;
-            var newRow = table.insertRow(numOfRows);
-            var cell0 = newRow.insertCell(0);
-            cell0.innerHTML='<select class="form-control" id="produto'+numOfRows+'_'+id+'" name="produto_id[]" onchange="sincronizaPreco(\'produto'+numOfRows+'_'+id+'\',{{$produtos}},\'preco'+numOfRows+'_'+id+'\'),calcularValor(\'quantidade'+numOfRows+'_'+id+'\',\'preco'+numOfRows+'_'+id+'\',\'linha'+numOfRows+'_'+id+'\', \'tabela'+id+'\',\'valorFinal'+id+'\','+id+')">\n' +
-                '                                                @foreach($produtos as $produto)\n' +
-                '                                                    <option value="{{$produto->id}}"  onclick="sincronizaPreco(\'{{$produto->preco}}\', \'preco0_'+id+'\')">{{$produto->nome}}</option>\n' +
-                '                                                @endforeach\n' +
-                '                                            </select>';
-            var cell1 = newRow.insertCell(1);
-            cell1.innerHTML='<input type="text " class="form-control" id="preco'+numOfRows+'_'+id+'" name="produto_preco[]" onchange="calcularValor(\'quantidade'+numOfRows+'_'+id+'\',\'preco'+numOfRows+'_'+id+'\',\'linha'+numOfRows+'_'+id+'\', \'tabela'+id+'\',\'valorFinal'+id+'\','+id+')">\n';
-            var cell2 = newRow.insertCell(2);
-            cell2.innerHTML='<input class="form-control" name="quantidade[]" id ="quantidade'+numOfRows+'_'+id+'" type="number" value="1" onchange="calcularValor(\'quantidade'+numOfRows+'_'+id+'\',\'preco'+numOfRows+'_'+id+'\',\'linha'+numOfRows+'_'+id+'\', \'tabela'+id+'\',\'valorFinal'+id+'\','+id+')">';
-            var cell3 = newRow.insertCell(3);
-            cell3.innerHTML='<input type="text" class="form-control" name="valorTotal[]" value="0" id="linha'+numOfRows+'_'+id+'">';
-            var cell4 = newRow.insertCell(4);
-            var char = "'"
-            var tabelaId = char.concat(idTabela, char);
-            cell4.innerHTML="<button  class=\"btn btn-primary rem\" style=\"width:80%;\" type=\"button\" class=\"btn btn-primary\" onclick=\"removerLinha(this,"+tabelaId+")\"> - </button>";
-
-
-
-        }
-        function removerLinha(row,idTabela, valorLinha) {
-            var x=row.parentNode.parentNode.rowIndex;
-            document.getElementById(idTabela).deleteRow(x);
-        }
-        function calcularValor(quantidade, preco, linha, idTabela,idFinal, id){
-            console.log(document.getElementById(idTabela).rows.length);
-
-            var preco = document.getElementById(preco).value;
-            var qtd = document.getElementById(quantidade).value;
-            var valorTotal = preco * qtd;
-            console.log(preco);
-            console.log(qtd);
-            console.log(valorTotal);
-            console.log(idFinal);
-            document.getElementById(linha).value = valorTotal;
-            var i = 0;
-            var valorFinal=0;
-            while( i <= document.getElementById(idTabela).rows.length - 1){
-                var id1 = "linha".concat(i,"_",id);
-                console.log(id1);
-                valorFinal += parseFloat(document.getElementById(id1).value);
-                console.log(valorFinal);
-                console.log(i);
-                i++;
-            }
-            document.getElementById(idFinal).value = valorFinal;
-
-
-        }
-        function sincronizaPreco(id, item, preco){
-            var index = document.getElementById(id).selectedIndex;
-            var produto = item[index];
-            console.log(produto);
-            console.log(produto['preco']);
-            console.log(document.getElementById(preco));
-            document.getElementById(preco).value = produto['preco'];
-        }
-    </script>
 
 @endsection('content')

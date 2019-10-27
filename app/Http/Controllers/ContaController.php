@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Cliente;
+use App\Pedido;
+use App\Produto;
 use Illuminate\Http\Request;
 use \App\Conta;
 class ContaController extends Controller
@@ -13,7 +16,10 @@ class ContaController extends Controller
      */
     public function index()
     {
-        //
+        $clientes = Cliente::get();
+        $produtos = Produto::get();
+        $pedidos = Pedido::get();
+        return view('conta.index',['clientes'=>$clientes->sortBy('Nome')],['produtos'=>$produtos],['pedidos'=>$pedidos]);
     }
 
     /**
@@ -70,9 +76,17 @@ class ContaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function adicionaPedido($id)
     {
-        //
+        $conta = Conta::findOrFail($id);
+        $pedidos = Pedido::get()->where('conta_id',$conta->id)->where('resta','>',0);
+        $conta -> saldoTotal = 0;
+        foreach ($pedidos as $pedido){
+            $conta -> saldoTotal += $pedido -> resta;
+            var_dump($conta->saldoTotal);
+        }
+        $conta->save();
+
     }
 
     /**

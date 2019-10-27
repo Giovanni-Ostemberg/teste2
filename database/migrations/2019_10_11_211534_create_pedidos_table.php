@@ -17,8 +17,7 @@ class CreatePedidosTable extends Migration
             $table->bigIncrements('id');
             $table->double('valorTotal');
             $table->Integer('conta_id')->foreign('conta_id')->references('id')->on('conta');
-            $table->integer('pessoa_id');
-            $table->integer('quantidade');
+            $table->integer('cliente_id');
             $table->float('pago');
             $table->float('resta');
             $table->timestamps();

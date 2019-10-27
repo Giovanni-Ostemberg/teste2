@@ -17,6 +17,7 @@ class CreateItensTable extends Migration
             $table->integer('produto_id')->foreign('produto_id')->references('id')->on('produto');
             $table->integer('pedido_id')->foreign('pedido_id')->references('id')->on('pedido');
             $table->integer('quantidade');
+            $table->float('total');
             $table->primary(['produto_id', 'pedido_id']);
             $table->timestamps();
         });

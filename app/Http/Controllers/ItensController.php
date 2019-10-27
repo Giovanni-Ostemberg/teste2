@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Produto;
 use Illuminate\Http\Request;
 
-class produtoController extends Controller
+class ItensController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,7 @@ class produtoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::get();
-        return view('produto.index', ['produtos' => $produtos]);
+        //
     }
 
     /**
@@ -23,8 +21,9 @@ class produtoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
+        //
     }
 
     /**
@@ -35,14 +34,7 @@ class produtoController extends Controller
      */
     public function store(Request $request)
     {
-
-        $produto = new Produto();
-        $produto->nome = $request ->nome;
-        $produto->preco = $request ->preco;
-        $produto->categoria = $request ->categoria;
-        $produto->save();
-        return redirect()->route('produtos.index') ->with('message', 'Produto alterado com sucesso!');
-
+        //
     }
 
     /**
@@ -51,15 +43,9 @@ class produtoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function produtoById($id)
+    public function show($id)
     {
-        $produto = Produto::findOrFail($id);
-        return $produto;
-    }
-
-    public function all()
-    {
-
+        //
     }
 
     /**
@@ -70,7 +56,7 @@ class produtoController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -80,14 +66,9 @@ class produtoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produto $produto)
+    public function update(Request $request, $id)
     {
-        $produto = Produto::findOrFail($produto->id);
-        $produto->nome = $request -> nome;
-        $produto->preco = $request -> preco;
-        $produto->categoria = $request ->categoria;
-        $produto->save();
-        return redirect()->route('produtos.index') ->with('message', 'Produto alterado com sucesso!');
+        //
     }
 
     /**
@@ -98,9 +79,6 @@ class produtoController extends Controller
      */
     public function destroy($id)
     {
-        $produto = Produto::findOrFail($id);
-        $produto->delete();
-        return redirect()->route('produtos.index') ->with('message', 'Produto excluido com sucesso!');
-
+        //
     }
 }
