@@ -84,6 +84,21 @@ class PedidoController extends Controller
         //
     }
 
+    public function itens($id)
+    {
+        $itens = Itens::get()->where('pedido_id', $id);
+        $conteudo = "";
+        $i = true;
+        foreach($itens as $item){
+            if($i!=true){
+                $conteudo=$conteudo." + ";
+            }
+            $conteudo=$conteudo.$item->quantidade." * ".Produto::findOrFail($item->produto_id)->nome;
+            $i=false;
+        }
+        return $conteudo;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

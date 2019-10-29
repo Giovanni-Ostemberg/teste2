@@ -29,3 +29,4 @@ Route::get('/pedido/{pedido}/destroy', 'PedidoController@destroy');
 
 Route::resource('contas','ContaController');
 Route::patch('/conta/update/{conta}', 'PedidoController@update');
+Route::get('/conta/show/{cliente}','ContaController@show');

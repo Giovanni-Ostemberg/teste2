@@ -18,8 +18,8 @@ class ContaController extends Controller
     {
         $clientes = Cliente::get();
         $produtos = Produto::get();
-        $pedidos = Pedido::get();
-        return view('conta.index',['clientes'=>$clientes->sortBy('Nome')],['produtos'=>$produtos],['pedidos'=>$pedidos]);
+        $contas = Conta::get();
+        return view('conta.index',['clientes'=>$clientes->sortBy('Nome')],['contas'=>$contas]);
     }
 
     /**
@@ -55,7 +55,16 @@ class ContaController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        $conta = Conta::findOrFail($cliente->conta_id);
+        $pedidos = Pedido::get()->where('conta_id',$conta->id);
+        foreach ($pedidos as $pedido){
+            $controller = new PedidoController();
+            $itens[]=$controller->itens($pedido->id);
+        }
+
+        return view('conta.show',['cliente' =>$cliente,'conta' => $conta,'pedidos' => $pedidos, 'itens'=>$itens]);
+
     }
 
     /**
