@@ -91,7 +91,7 @@
             <td colspan="3"></td>
             <td style="text-align:center;">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">
-                    Novo Produto
+                    Novo Cliente
                 </button>
             </td>
         </tr>

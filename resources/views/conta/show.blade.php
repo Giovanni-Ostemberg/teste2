@@ -26,5 +26,6 @@
                 <td style="text-align: center;">{{$conta->saldoTotal}}</td>
             </tr>
         </table>
+        Adicionar a opção de totalizar os pedidos abertos até uma data específica
     </div>
 @endsection('content')
