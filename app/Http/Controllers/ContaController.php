@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Pagamento;
 use App\Pedido;
 use App\Produto;
 use Illuminate\Http\Request;
@@ -58,12 +59,13 @@ class ContaController extends Controller
         $cliente = Cliente::findOrFail($id);
         $conta = Conta::findOrFail($cliente->conta_id);
         $pedidos = Pedido::get()->where('conta_id',$conta->id);
+        $pagamentos = Pagamento::get()->where('conta_id',$conta->id);
         foreach ($pedidos as $pedido){
             $controller = new PedidoController();
             $itens[]=$controller->itens($pedido->id);
         }
 
-        return view('conta.show',['cliente' =>$cliente,'conta' => $conta,'pedidos' => $pedidos, 'itens'=>$itens]);
+        return view('conta.show',['cliente' =>$cliente,'conta' => $conta,'pedidos' => $pedidos, 'itens'=>$itens, 'pagamentos'=>$pagamentos]);
 
     }
 
@@ -88,11 +90,29 @@ class ContaController extends Controller
     public function adicionaPedido($id)
     {
         $conta = Conta::findOrFail($id);
-        $pedidos = Pedido::get()->where('conta_id',$conta->id)->where('resta','>',0);
+        $pedidos = Pedido::get()->where('conta_id',$conta->id);
+        $pagamentos = Pagamento::get()->where('conta_id', $conta->id);
+        if($conta->saldoTotal>0){
+            $pago = $conta->saldoTotal;
+            foreach ($pedidos as $pedido){
+                if($pedido->resta>$pago){
+                    $pedido->resta-=$pago;
+                    $pedido->save();
+                    $pago = 0;
+                }else{
+                    $pago -= $pedido->resta;
+                    $pedido->resta = 0;
+                    $pedido->save();
+                }
+                $conta -> saldoTotal -= $pedido -> valorTotal;
+            }
+        }
         $conta -> saldoTotal = 0;
         foreach ($pedidos as $pedido){
-            $conta -> saldoTotal += $pedido -> resta;
-            var_dump($conta->saldoTotal);
+            $conta -> saldoTotal -= $pedido -> valorTotal;
+        }
+        foreach ($pagamentos as $pagamento){
+            $conta -> saldoTotal += $pagamento -> valor;
         }
         $conta->save();
 
@@ -101,7 +121,8 @@ class ContaController extends Controller
     public function adicionaPagamento($id, $pagamento)
     {
         $conta = Conta::findOrFail($id);
-        $pedidos = Pedido::get()->where('conta_id',$conta->id)->where('resta','>',0);
+        $pedidos = Pedido::get()->where('conta_id',$conta->id);
+
         $conta -> saldoTotal = 0;
         $pago = $pagamento;
         foreach ($pedidos as $pedido){
@@ -114,8 +135,11 @@ class ContaController extends Controller
                 $pedido->resta = 0;
                 $pedido->save();
             }
-            $conta -> saldoTotal += $pedido -> resta;
-            var_dump($conta->saldoTotal);
+            $conta -> saldoTotal -= $pedido -> valorTotal;
+        }
+        $pagamentos = Pagamento::get()->where('conta_id', $conta->id);
+        foreach ($pagamentos as $pagamento){
+            $conta -> saldoTotal += $pagamento -> valor;
         }
         $conta->save();
 

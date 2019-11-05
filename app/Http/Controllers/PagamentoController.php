@@ -22,7 +22,7 @@ class PagamentoController extends Controller
         $conta1 = new ContaController();
         $conta1->adicionaPagamento($pagamento -> conta_id, $pagamento->valor);
 
-        return redirect()->route('conta.show',['conta'=>$conta])->with('message','ok');
+        return redirect()->action('ContaController@show',['cliente'=>$request->cliente])->with('message','ok');
 
 
 
@@ -85,8 +85,10 @@ class PagamentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        $pagamento = Pagamento::findOrFail($id);
+        $pagamento->delete();
+        return redirect()->action('ContaController@show',['cliente'=>$request->cliente]);
     }
 }

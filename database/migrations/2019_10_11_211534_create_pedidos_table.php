@@ -20,6 +20,7 @@ class CreatePedidosTable extends Migration
             $table->integer('cliente_id');
             $table->float('pago');
             $table->float('resta');
+            $table->date('data');
             $table->timestamps();
         });
     }
