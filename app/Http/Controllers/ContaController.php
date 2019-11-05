@@ -98,6 +98,29 @@ class ContaController extends Controller
 
     }
 
+    public function adicionaPagamento($id, $pagamento)
+    {
+        $conta = Conta::findOrFail($id);
+        $pedidos = Pedido::get()->where('conta_id',$conta->id)->where('resta','>',0);
+        $conta -> saldoTotal = 0;
+        $pago = $pagamento;
+        foreach ($pedidos as $pedido){
+            if($pedido->resta>$pago){
+                $pedido->resta-=$pago;
+                $pedido->save();
+                $pago = 0;
+            }else{
+                $pago -= $pedido->resta;
+                $pedido->resta = 0;
+                $pedido->save();
+            }
+            $conta -> saldoTotal += $pedido -> resta;
+            var_dump($conta->saldoTotal);
+        }
+        $conta->save();
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *

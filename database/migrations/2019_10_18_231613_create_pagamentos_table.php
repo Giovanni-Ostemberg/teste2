@@ -16,7 +16,7 @@ class CreatePagamentosTable extends Migration
         Schema::create('pagamentos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->float('valor');
-            $table->date('dataPagamento');
+            $table->timestamp('dataPagamento');
             $table->bigInteger('conta_id')->foreign('conta_id')->references('id')->on('conta');
             $table->timestamps();
         });

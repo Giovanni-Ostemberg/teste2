@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pagamento;
 use Illuminate\Http\Request;
 
 class PagamentoController extends Controller
@@ -11,9 +12,20 @@ class PagamentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function store($conta, Request $request)
     {
-        //
+        $pagamento = new Pagamento();
+        $pagamento->valor = $request -> pagamento;
+        $pagamento->conta_id = $conta;
+        $pagamento -> save();
+
+        $conta1 = new ContaController();
+        $conta1->adicionaPagamento($pagamento -> conta_id, $pagamento->valor);
+
+        return redirect()->route('conta.show',['conta'=>$conta])->with('message','ok');
+
+
+
     }
 
     /**
@@ -32,10 +44,6 @@ class PagamentoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.

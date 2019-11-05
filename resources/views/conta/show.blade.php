@@ -11,12 +11,15 @@
                 <tr>
                     <th style="text-align: center;">Itens</th>
                     <th style="text-align: center;">Total</th>
+                    <th style="text-align: center;">Resta</th>
+
                 </tr>
             </thead>
             @foreach($pedidos as $pedido)
                 <tr>
                     <td scope="col" style="text-align: center;">{{$itens[$i]}}</td>
                     <td scope="col" style="text-align: center;">{{$pedido->valorTotal}}</td>
+                    <td scope="col" style="text-align: center;">{{$pedido->resta}}</td>
                     <?php $i++ ?>
                 </tr>
             @endforeach
@@ -28,4 +31,34 @@
         </table>
         Adicionar a opção de totalizar os pedidos abertos até uma data específica
     </div>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
+        Efetuar Pagamento
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h1>Cliente: {{$cliente->Nome}}</h1>
+                    <form action="/pagamento/store/{{$conta ->id}}">
+                        <input type="text" class="form-control" name="pagamento" value="0.00">
+                        <button type="submit">Confirmar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary">Salvar mudanças</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection('content')
