@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="1c51792d-feda-4427-9e61-18d520745681" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="1c51792d-feda-4427-9e61-18d520745681" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ContaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ContaController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PagamentoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PagamentoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PedidoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PedidoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_11_211534_create_pedidos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_11_211534_create_pedidos_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/conta/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/conta/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
+>>>>>>> 0d7fadf12320623f70737fc86a6a5a606e3c7778
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

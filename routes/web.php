@@ -28,7 +28,8 @@ Route::patch('/pedido/update/{pedido}', 'PedidoController@update');
 Route::get('/pedido/{pedido}/destroy', 'PedidoController@destroy');
 
 Route::resource('contas','ContaController');
-Route::patch('/conta/update/{conta}', 'PedidoController@update');
+Route::patch('/conta/update/{conta}', 'ContaController@update');
 Route::get('/conta/show/{cliente}','ContaController@show');
 
 Route::get('/pagamento/store/{conta}', 'PagamentoController@store');
+Route::get('/pagamento/{pagamento}/destroy', 'PagamentoController@destroy');

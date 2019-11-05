@@ -7,6 +7,7 @@ use App\Conta;
 use App\Itens;
 use App\Pedido;
 use App\Produto;
+use DemeterChain\C;
 use http\Client;
 use Illuminate\Http\Request;
 
@@ -43,6 +44,7 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
         $pedido = new Pedido();
+        $conta = Conta::findOrFail($request ->conta_id);
         $pedido -> conta_id = $request ->conta_id;
         $pedido -> cliente_id = $request -> cliente_id;
         $pedido -> valorTotal = 0;
