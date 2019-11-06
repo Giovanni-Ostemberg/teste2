@@ -58,7 +58,25 @@ class ContaController extends Controller
     {
         $cliente = Cliente::findOrFail($id);
         $conta = Conta::findOrFail($cliente->conta_id);
-        $pedidos = Pedido::get()->where('conta_id',$conta->id);
+        $pedidos = Pedido::get()
+            ->where('conta_id',$conta->id)
+            ->where('resta','>',0);
+        $pagamentos = Pagamento::get()->where('conta_id',$conta->id);
+        foreach ($pedidos as $pedido){
+            $controller = new PedidoController();
+            $itens[]=$controller->itens($pedido->id);
+        }
+
+        return view('conta.show',['cliente' =>$cliente,'conta' => $conta,'pedidos' => $pedidos, 'itens'=>$itens, 'pagamentos'=>$pagamentos]);
+
+    }
+
+    public function showAll($id)
+    {
+        $cliente = Cliente::findOrFail($id);
+        $conta = Conta::findOrFail($cliente->conta_id);
+        $pedidos = Pedido::get()
+            ->where('conta_id',$conta->id);
         $pagamentos = Pagamento::get()->where('conta_id',$conta->id);
         foreach ($pedidos as $pedido){
             $controller = new PedidoController();
@@ -118,24 +136,30 @@ class ContaController extends Controller
 
     }
 
-    public function adicionaPagamento($id, $pagamento)
+    public function adicionaPagamento($id, $pagamento,$parcial)
     {
         $conta = Conta::findOrFail($id);
         $pedidos = Pedido::get()->where('conta_id',$conta->id);
 
         $conta -> saldoTotal = 0;
         $pago = $pagamento;
-        foreach ($pedidos as $pedido){
-            if($pedido->resta>$pago){
-                $pedido->resta-=$pago;
-                $pedido->save();
-                $pago = 0;
-            }else{
-                $pago -= $pedido->resta;
-                $pedido->resta = 0;
-                $pedido->save();
+        if($parcial == false) {
+            foreach ($pedidos as $pedido) {
+                if ($pedido->resta > $pago) {
+                    $pedido->resta -= $pago;
+                    $pedido->save();
+                    $pago = 0;
+                } else {
+                    $pago -= $pedido->resta;
+                    $pedido->resta = 0;
+                    $pedido->save();
+                }
+                $conta->saldoTotal -= $pedido->valorTotal;
             }
-            $conta -> saldoTotal -= $pedido -> valorTotal;
+        }else{
+            foreach($pedidos as $pedido){
+                $conta->saldoTotal -= $pedido->valorTotal;
+            }
         }
         $pagamentos = Pagamento::get()->where('conta_id', $conta->id);
         foreach ($pagamentos as $pagamento){

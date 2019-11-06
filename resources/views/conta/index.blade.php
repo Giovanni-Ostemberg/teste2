@@ -17,16 +17,16 @@
         <tbody>
         @foreach($clientes as $cliente)
             <tr>
-                <td>{{$cliente->id}}</td>
-                <td>
+                <td style="text-align: center;">{{$cliente->id}}</td>
+                <td style="text-align: center;">
                     <a href="/conta/show/{{$cliente->id}}">
                         <button type="button" class="btn btn-dark">
                             {{$cliente->Nome}}
                         </button>
                     </a>
                 </td>
-                <td>{{$contas[($cliente->conta_id)-1]->saldoTotal}}</td>
-                <td>{{$contas[($cliente->conta_id)-1]->updated_at}}</td>
+                <td style="text-align: center;">{{$contas[($cliente->conta_id)-1]->saldoTotal}}</td>
+                <td style="text-align: center;">{{\Carbon\Carbon::parse($contas[($cliente->conta_id)-1]->updated_at)->format('d/m/Y')}}</td>
             </tr>
 
         @endforeach

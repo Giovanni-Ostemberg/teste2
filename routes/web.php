@@ -32,4 +32,9 @@ Route::patch('/conta/update/{conta}', 'ContaController@update');
 Route::get('/conta/show/{cliente}','ContaController@show');
 
 Route::get('/pagamento/store/{conta}', 'PagamentoController@store');
+Route::get('/pagamento/parcial/{conta}', 'PagamentoController@parcial');
 Route::get('/pagamento/{pagamento}/destroy', 'PagamentoController@destroy');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

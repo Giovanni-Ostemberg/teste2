@@ -15,8 +15,8 @@
         <tbody>
         <?php $__currentLoopData = $clientes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cliente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr>
-                <td><?php echo e($cliente->id); ?></td>
-                <td>
+                <td style="text-align: center;"><?php echo e($cliente->id); ?></td>
+                <td style="text-align: center;">
                     <a href="/conta/show/<?php echo e($cliente->id); ?>">
                         <button type="button" class="btn btn-dark">
                             <?php echo e($cliente->Nome); ?>
@@ -24,8 +24,8 @@
                         </button>
                     </a>
                 </td>
-                <td><?php echo e($contas[($cliente->conta_id)-1]->saldoTotal); ?></td>
-                <td><?php echo e($contas[($cliente->conta_id)-1]->updated_at); ?></td>
+                <td style="text-align: center;"><?php echo e($contas[($cliente->conta_id)-1]->saldoTotal); ?></td>
+                <td style="text-align: center;"><?php echo e(\Carbon\Carbon::parse($contas[($cliente->conta_id)-1]->updated_at)->format('d/m/Y')); ?></td>
             </tr>
 
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

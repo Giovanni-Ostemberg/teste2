@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pagamento;
+use App\Pedido;
 use Illuminate\Http\Request;
 
 class PagamentoController extends Controller
@@ -20,11 +21,31 @@ class PagamentoController extends Controller
         $pagamento -> save();
 
         $conta1 = new ContaController();
-        $conta1->adicionaPagamento($pagamento -> conta_id, $pagamento->valor);
+        $conta1->adicionaPagamento($pagamento -> conta_id, $pagamento->valor,false);
 
         return redirect()->action('ContaController@show',['cliente'=>$request->cliente])->with('message','ok');
 
 
+
+    }
+
+    public function parcial($conta, Request $request)
+    {
+        $pagamento = new Pagamento();
+        $pagamento->valor = $request -> somaParcial;
+        $pagamento->conta_id = $conta;
+
+        foreach ($request->pedido as $parcial){
+            $pedido=Pedido::findOrFail($parcial);
+            $pedido->resta =0;
+            $pedido->save();
+        }
+        $pagamento -> save();
+
+        $conta1 = new ContaController();
+        $conta1->adicionaPagamento($pagamento -> conta_id, $pagamento->valor,true);
+
+        return redirect()->action('ContaController@show',['cliente'=>$request->cliente])->with('message','ok');
 
     }
 

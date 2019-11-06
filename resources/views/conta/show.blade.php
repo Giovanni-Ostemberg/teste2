@@ -13,32 +13,41 @@
                 <th style="text-align: center;">Itens</th>
                 <th style="text-align: center;">Total</th>
                 <th style="text-align: center;">Resta</th>
-
+                <th style="text-align: center;">Add</th>
             </tr>
             </thead>
-            @foreach($pedidos as $pedido)
-                @if($pedido->resta == 0)
-                    <tr class="table-success">
-                @else
-                    @if($pedido->resta < $pedido->valorTotal )
-                        <tr class="table-warning">
+            <tbody>
+            <form action="/pagamento/parcial/{{$conta->id}}">
+                <input type="hidden" name="cliente" value="{{$cliente->id}}">
+                @foreach($pedidos as $pedido)
+                    @if($pedido->resta == 0)
+                        <tr class="table-success">
                     @else
-                        <tr class="table-danger">
-                            @endif
-                            @endif
-                            <td scope="col" style="text-align: center; color:black;">{{ \Carbon\Carbon::parse($pedido->created_at)->format('d/m/Y')}}</td>
-                            <td scope="col" style="text-align: center; color:black;">{{$itens[$i]}}</td>
-                            <td scope="col" style="text-align: center; color:black;">{{$pedido->valorTotal}}</td>
-                            <td scope="col" style="text-align: center; color:black;">{{$pedido->resta}}</td>
+                        @if($pedido->resta < $pedido->valorTotal )
+                            <tr class="table-warning">
+                        @else
+                            <tr class="table-danger">
+                                @endif
+                                @endif
+                                <td scope="col" style="text-align: center; color:black;">{{ \Carbon\Carbon::parse($pedido->created_at)->format('d/m/Y')}}</td>
+                                <td scope="col" style="text-align: center; color:black;">{{$itens[$i]}}</td>
+                                <td scope="col" style="text-align: center; color:black;">{{$pedido->valorTotal}}</td>
+                                <td scope="col" style="text-align: center; color:black;">{{$pedido->resta}}</td>
+                                <td scope="col" style="text-align: center; color:black;"><input type="checkbox" value="{{$pedido->id}}" id="parcial{{$pedido->id}}" name="pedido[]" onClick="somaPedido({{$pedido->resta}},'parcial{{$pedido->id}}')"></td>
 
-                            <?php $i++ ?>
-                        </tr>
-                        @endforeach
+                                <?php $i++ ?>
+                            </tr>
+                            @endforeach
 
-                        <tr>
-                            <th style="text-align: center;">Valor Total</th>
-                            <td style="text-align: center;">{{$conta->saldoTotal}}</td>
-                        </tr>
+                            <tr>
+                                <th style="text-align: center;">Valor Total</th>
+                                <td style="text-align: center;">{{$conta->saldoTotal}}</td>
+                                <td>Parcial</td>
+                                <td><input type="text" id="parcial" name="somaParcial" value="0"></td>
+                                <td><button type="submit">Pagar Parcial</button></td>
+                            </tr>
+            </form>
+            </tbody>
         </table>
         Adicionar a opção de totalizar os pedidos abertos até uma data específica
     </div>
@@ -93,5 +102,24 @@
             </div>
         </div>
     </div>
+    <script>
+        function somaPedido(valor, name){
+            var linha = document.getElementById(name);
+            var total = parseFloat(document.getElementById('parcial').value);
+            var valor = parseFloat(valor);
+            console.log(linha);
+            if(total==0){
+                total = valor;
+            }else{
+                if(linha.checked){
+                    total+=valor;
+                }else {
+                    total -= valor;
+                }
+            }
+            document.getElementById('parcial').value = total;
+        }
+
+    </script>
 
 @endsection('content')
